@@ -1,8 +1,12 @@
 import './App.css';
+import CourseListsPage from './components/CourseListsPage';
 
 function App() {
   return (
-    "hello"
+    <div>
+      <CourseListsPage />
+    </div>
+
   );
 }
 
