@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { addCourse } from '../actions/index';
+import Modal from 'react-modal';
 import './courseListsPage.css'
 
 function CourseListsPage({ courses, addCourse, loading,

@@ -8,6 +8,7 @@ import App from './App';
 import { reducer } from './reducer/index';
 import thunk from 'redux-thunk';
 import { loadCourses } from './actions';
+import Modal from 'react-modal';
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -20,6 +21,8 @@ const composeEnhancers =
 const store = createStore(reducer, composeEnhancers(
   applyMiddleware(thunk)))
 store.dispatch(loadCourses())
+
+Modal.setAppElement('#root')
 
 ReactDOM.render(
   <Provider store={store}>
