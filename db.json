@@ -4,6 +4,26 @@
       "name": "Redux",
       "price": "50",
       "id": 1
+    },
+    {
+      "name": "React ",
+      "price": "100",
+      "id": 2
+    },
+    {
+      "name": "Kigali",
+      "price": "30",
+      "id": 3
+    },
+    {
+      "name": "RTV",
+      "price": "1",
+      "id": 4
+    },
+    {
+      "name": "Bale",
+      "price": "120",
+      "id": 5
     }
   ]
 }
