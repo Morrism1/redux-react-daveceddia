@@ -7,6 +7,8 @@ import {
   LOAD_COURSE_BEGIN,
   LOAD_COURSE_SUCCESS,
   LOAD_COURSE_ERROR,
+  OPEN_NEW_COURSE_MODAL,
+  CLOSED_NEW_COURSE_MODAL
 } from '../actions';
 
 const initialState = {
@@ -15,6 +17,7 @@ const initialState = {
   courses: [],
   coursesLoading: false,
   coursesError: null,
+  newCourseModalOpen: false
 };
 
 export const reducer = produce((draft, action) => {
@@ -26,6 +29,7 @@ export const reducer = produce((draft, action) => {
     case ADD_COURSE_SUCCESS:
       draft.saveInProgress = false;
       draft.courses.push(action.payload);
+      draft.newCourseModalOpen = false;
       return;
     case ADD_COURSE_ERROR:
       draft.saveInProgress = false;
@@ -41,6 +45,13 @@ export const reducer = produce((draft, action) => {
     case LOAD_COURSE_ERROR:
       draft.coursesLoading = false;
       draft.coursesError = action.error;
+      return;
+    case OPEN_NEW_COURSE_MODAL:
+      draft.newCourseModalOpen = true;
+      return;
+    case CLOSED_NEW_COURSE_MODAL:
+      draft.newCourseModalOpen = false;
+      draft.saveError = null
       return;
     default:
       return;
