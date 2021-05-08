@@ -1,17 +1,11 @@
-import { useState } from 'react';
 import { connect } from 'react-redux';
-import { addCourse } from '../actions/index';
+import { addCourse, openNewCourseModal, closedNewCourseModal } from '../actions/index';
 import Modal from 'react-modal';
+import NewCourse from '../components/NewCourse';
 import './courseListsPage.css'
 
-function CourseListsPage({ courses, addCourse, loading,
-  error, coursesLoading, coursesError }) {
-  const [courseName, setCourseName] = useState('');
-  const [coursePrice, setCoursePrice] = useState('')
-  const handleSubmit = e => {
-    e.preventDefault();
-    addCourse(courseName, coursePrice)
-  }
+function CourseListsPage({ courses, coursesLoading, coursesError, openNewCourseModal, isModalOpen, closedNewCourseModal }) {
+
   if (coursesLoading) {
     return <div>loading...</div>
   }
@@ -20,42 +14,12 @@ function CourseListsPage({ courses, addCourse, loading,
   }
   return courses.length === 0 ? (
     <div className="CreateCourse">
-      <h1>Create your first course</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Pick a name:
-          <input
-            disabled={loading}
-            value={courseName}
-            onChange={(e) => setCourseName(e.target.value)}
-          />
-
-          {error && (
-            <div className="error-message">
-              Error: {error.message}
-            </div>
-          )}
-        </label>
-        <label>
-          Put a Price:
-          <input
-            disabled={loading}
-            value={coursePrice}
-            onKeyPress={(event) => {
-              if (!/[0-9]/.test(event.key)) {
-                event.preventDefault();
-              }
-            }}
-            onChange={(e) => setCoursePrice(e.target.value)}
-          />
-        </label>
-        <button type='submit' disabled={loading}>Create Course</button>
-      </form>
+      <NewCourse />
     </div>
   ) : (
     <div className="CourseList">
       <h1>Your Courses</h1>
-      <button className="new-course-btn">New Course</button>
+      <button className="new-course-btn" onClick={openNewCourseModal}>New Course</button>
       <ul>
         {courses.map((course) => (
           <li key={course.id}>
@@ -65,6 +29,9 @@ function CourseListsPage({ courses, addCourse, loading,
 
         ))}
       </ul>
+      <Modal isOpen={isModalOpen} onRequestClose={closedNewCourseModal}>
+        <NewCourse />
+      </Modal>
     </div>
   );
 }
@@ -74,7 +41,8 @@ const mapState = (state) => ({
   loading: state.saveInProgress,
   error: state.saveError,
   coursesLoading: state.coursesLoading,
-  coursesError: state.coursesError
+  coursesError: state.coursesError,
+  isModalOpen: state.newCourseModalOpen
 });
 
-export default connect(mapState, { addCourse })(CourseListsPage);
+export default connect(mapState, { addCourse, openNewCourseModal, closedNewCourseModal })(CourseListsPage);
