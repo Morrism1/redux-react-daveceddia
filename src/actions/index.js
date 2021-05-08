@@ -6,6 +6,8 @@ export const ADD_COURSE_ERROR = 'ADD_COURSE_ERROR'
 export const LOAD_COURSE_BEGIN = 'LOAD_COURSE_BEGIN'
 export const LOAD_COURSE_SUCCESS = 'LOAD_COURSE_SUCCESS'
 export const LOAD_COURSE_ERROR = 'LOAD_COURSE_ERROR'
+export const OPEN_NEW_COURSE_MODAL = 'OPEN_NEW_COURSE_MODAL'
+export const CLOSED_NEW_COURSE_MODAL = 'CLOSED_NEW_COURSE_MODAL'
 
 export const addCourse = (name, price) => {
   return dispatch => {
@@ -32,3 +34,11 @@ export const loadCourses = () => {
       })
   }
 }
+
+export const openNewCourseModal = () => ({
+  type: OPEN_NEW_COURSE_MODAL
+})
+
+export const closedNewCourseModal = () => ({
+  type: CLOSED_NEW_COURSE_MODAL
+})
