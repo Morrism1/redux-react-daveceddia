@@ -1,3 +1,9 @@
 {
-  "courses": []
+  "courses": [
+    {
+      "name": "Redux",
+      "price": "50",
+      "id": 1
+    }
+  ]
 }
