@@ -1,9 +1,20 @@
 import axios from "axios"
 
+const PREFIX = "/api"
 export const courseCreate = async (name, price) => {
   const data = await axios({
     method: 'POST',
-    url: '/courses',
+    url: PREFIX + '/courses',
+    data: { name: name, price: price }
+  })
+
+  return data.data
+}
+
+export const lessonCreate = async (name, price) => {
+  const data = await axios({
+    method: 'POST',
+    url: PREFIX + '/lessons',
     data: { name: name, price: price }
   })
 
@@ -11,7 +22,7 @@ export const courseCreate = async (name, price) => {
 }
 
 export const getCourses = async () => {
-  const data = await axios.get('/courses').then(res => res)
+  const data = await axios.get(PREFIX + '/courses').then(res => res)
 
   return data.data
 }
