@@ -1,11 +1,16 @@
+// @ts-nocheck
 import './App.css';
 import CourseListsPage from './pages/CourseListsPage';
+import { Router, Redirect } from '@reach/router'
+import CourseDetailsPage from './pages/CourseDetailsPage';
 
 function App() {
   return (
-    <div>
-      <CourseListsPage />
-    </div>
+    <Router>
+      <Redirect noThrow from="/" to="/courses" />
+      <CourseListsPage path="/courses" />
+      <CourseDetailsPage path="/courses/:courseId" />
+    </Router>
 
   );
 }
