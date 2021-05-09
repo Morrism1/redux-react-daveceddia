@@ -8,6 +8,9 @@ export const LOAD_COURSE_SUCCESS = 'LOAD_COURSE_SUCCESS'
 export const LOAD_COURSE_ERROR = 'LOAD_COURSE_ERROR'
 export const OPEN_NEW_COURSE_MODAL = 'OPEN_NEW_COURSE_MODAL'
 export const CLOSED_NEW_COURSE_MODAL = 'CLOSED_NEW_COURSE_MODAL'
+export const ADD_LESSON_BEGIN = 'ADD_LESSON_BEGIN'
+export const ADD_LESSON_SUCCESS = 'ADD_LESSON_SUCCESS'
+export const ADD_LESSON_ERROR = 'ADD_LESSON_ERROR'
 
 export const addCourse = (name, price) => {
   return dispatch => {
@@ -32,6 +35,18 @@ export const loadCourses = () => {
       .catch(error => {
         dispatch({ type: LOAD_COURSE_ERROR, error })
       })
+  }
+}
+
+export const addLesson = (name, courseId) => {
+  return dispatch => {
+    dispatch({
+      type: ADD_LESSON_SUCCESS, payload: {
+        id: Math.random(),
+        name,
+        courseId
+      }
+    })
   }
 }
 
