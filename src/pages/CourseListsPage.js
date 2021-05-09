@@ -3,11 +3,13 @@ import { addCourse, openNewCourseModal, closedNewCourseModal } from '../actions/
 import Modal from 'react-modal';
 import NewCourse from '../components/NewCourse';
 import './courseListsPage.css'
+import { Link } from '@reach/router';
+import Loading from '../components/Loading';
 
 function CourseListsPage({ courses, coursesLoading, coursesError, openNewCourseModal, isModalOpen, closedNewCourseModal }) {
 
   if (coursesLoading) {
-    return <div>loading...</div>
+    return <Loading />
   }
   if (coursesError) {
     return <div>{coursesError.message}</div>
@@ -23,8 +25,10 @@ function CourseListsPage({ courses, coursesLoading, coursesError, openNewCourseM
       <ul>
         {courses.map((course) => (
           <li key={course.id}>
-            <div className="title">{course.name}</div>
-            <div className="price">{`$ ${course.price}.00`}</div>
+            <Link to={`/courses/${course.id}`}>
+              <div className="title">{course.name}</div>
+              <div className="price">{`$ ${course.price}.00`}</div>
+            </Link>
           </li>
 
         ))}

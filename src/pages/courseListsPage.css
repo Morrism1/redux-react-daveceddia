@@ -73,13 +73,16 @@
   list-style: none;
   padding: 0;
 }
-.CourseList li {
+.CourseList li > a {
   margin-bottom: 20px;
   line-height: 1.5;
   font-weight: 600;
   border: 1px solid #ddd;
   padding: 10px;
   border-radius: 3px;
+  display: block;
+  text-decoration: none;
+  color: #222;
 }
 .CourseList .price {
   opacity: 0.5;
