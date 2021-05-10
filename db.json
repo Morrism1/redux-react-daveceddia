@@ -24,6 +24,23 @@
       "name": "Bale",
       "price": "120",
       "id": 5
+    },
+    {
+      "name": "Viking ",
+      "price": "65",
+      "id": 6
+    },
+    {
+      "name": "Hero",
+      "price": "23",
+      "id": 7
+    }
+  ],
+  "lessons": [
+    {
+      "name": "Gulli",
+      "courseId": 1,
+      "id": 1
     }
   ]
 }
