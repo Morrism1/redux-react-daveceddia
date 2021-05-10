@@ -11,11 +11,11 @@ export const courseCreate = async (name, price) => {
   return data.data
 }
 
-export const lessonCreate = async (name, price) => {
+export const lessonCreate = async (name, courseId) => {
   const data = await axios({
     method: 'POST',
     url: PREFIX + '/lessons',
-    data: { name: name, price: price }
+    data: { name: name, courseId: courseId }
   })
 
   return data.data
