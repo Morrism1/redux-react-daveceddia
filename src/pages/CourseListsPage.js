@@ -41,12 +41,12 @@ function CourseListsPage({ courses, coursesLoading, coursesError, openNewCourseM
 }
 
 const mapState = (state) => ({
-  courses: state.courses,
-  loading: state.saveInProgress,
-  error: state.saveError,
-  coursesLoading: state.coursesLoading,
-  coursesError: state.coursesError,
-  isModalOpen: state.newCourseModalOpen
+  courses: state.courses.courses,
+  loading: state.courses.saveInProgress,
+  error: state.courses.saveError,
+  coursesLoading: state.courses.coursesLoading,
+  coursesError: state.courses.coursesError,
+  isModalOpen: state.courses.newCourseModalOpen
 });
 
 export default connect(mapState, { addCourse, openNewCourseModal, closedNewCourseModal })(CourseListsPage);

@@ -38,9 +38,9 @@ function CourseDetailsPage({ courseId, course, loading, lessons }) {
 const mapToState = (state, ownProps) => {
   const CourseId = parseInt(ownProps.courseId, 10);
   return {
-    loading: state.coursesLoading,
-    lessons: state.lessons.filter(lesson => lesson.courseId === CourseId),
-    course: state.courses.find((c) => c.id === CourseId),
+    loading: state.courses.coursesLoading,
+    lessons: state.lessons.lessons.filter(lesson => lesson.courseId === CourseId),
+    course: state.courses.courses.find((c) => c.id === CourseId),
   };
 };
 

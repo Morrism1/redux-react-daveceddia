@@ -56,9 +56,9 @@ function NewCourse({ addCourse, loading,
 }
 
 const mapState = (state) => ({
-  courses: state.courses,
-  loading: state.saveInProgress,
-  error: state.saveError
+  courses: state.courses.courses,
+  loading: state.courses.saveInProgress,
+  error: state.courses.saveError
 })
 
 export default connect(mapState, { addCourse })(NewCourse)
