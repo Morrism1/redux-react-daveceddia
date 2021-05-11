@@ -1,4 +1,4 @@
-import { courseCreate, getCourses, lessonCreate } from '../api';
+import { courseCreate, getCourses, getLessons, lessonCreate, updateLesson } from '../api';
 
 export const ADD_COURSE_BEGIN = 'ADD_COURSE_BEGIN';
 export const ADD_COURSE_SUCCESS = 'ADD_COURSE_SUCCESS';
@@ -11,6 +11,12 @@ export const CLOSED_NEW_COURSE_MODAL = 'CLOSED_NEW_COURSE_MODAL';
 export const ADD_LESSON_BEGIN = 'ADD_LESSON_BEGIN';
 export const ADD_LESSON_SUCCESS = 'ADD_LESSON_SUCCESS';
 export const ADD_LESSON_ERROR = 'ADD_LESSON_ERROR';
+export const LOAD_LESSON_BEGIN = 'LOAD_LESSON_BEGIN';
+export const LOAD_LESSON_SUCCESS = 'LOAD_LESSON_SUCCESS';
+export const LOAD_LESSON_ERROR = 'LOAD_LESSON_ERROR';
+export const SAVE_LESSON_BEGIN = 'SAVE_LESSON_BEGIN';
+export const SAVE_LESSON_SUCCESS = 'SAVE_LESSON_SUCCESS';
+export const SAVE_LESSON_ERROR = 'SAVE_LESSON_ERROR';
 
 export const addCourse = (name, price) => {
   return (dispatch) => {
@@ -38,10 +44,23 @@ export const loadCourses = () => {
   };
 };
 
+export const loadLessons = (courseId) => {
+  return (dispatch) => {
+    dispatch({ type: LOAD_LESSON_BEGIN });
+    getLessons(courseId)
+      .then((lessons) => {
+        dispatch({ type: LOAD_LESSON_SUCCESS, payload: lessons });
+      })
+      .catch((error) => {
+        dispatch({ type: LOAD_LESSON_ERROR, error });
+      });
+  };
+};
+
 export const addLesson = (name, courseId) => {
   return (dispatch) => {
     dispatch({ type: ADD_LESSON_BEGIN });
-    lessonCreate(name, courseId).then((lesson) => {
+    return lessonCreate(name, courseId).then((lesson) => {
       dispatch({
         type: ADD_LESSON_SUCCESS,
         payload: lesson,
@@ -49,6 +68,20 @@ export const addLesson = (name, courseId) => {
     }).catch((error) => {
       dispatch({ type: ADD_LESSON_ERROR, error });
     });;
+  };
+};
+
+export const saveLesson = (lesson) => {
+  return (dispatch) => {
+    dispatch({ type: SAVE_LESSON_BEGIN });
+    return updateLesson(lesson).then((lesson) => {
+      dispatch({
+        type: SAVE_LESSON_SUCCESS,
+        payload: lesson,
+      });
+    }).catch((error) => {
+      dispatch({ type: SAVE_LESSON_ERROR, error });
+    });
   };
 };
 
