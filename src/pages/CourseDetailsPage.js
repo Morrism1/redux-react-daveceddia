@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import NotFoundPage from './NotFoundPage';
 import './CourseDetailPage.css';
 import Loading from '../components/Loading';
 import NewLesson from '../components/NewLesson';
+import { getCoursesById, getLessonsByCourse } from '../selectors';
+import { loadLessons } from '../actions/index';
 
-function CourseDetailsPage({ courseId, course, loading, lessons }) {
+function CourseDetailsPage({ courseId, course, loading, lessons, loadLessons }) {
+
+  useEffect(() => {
+    loadLessons(course.id)
+  }, [course])
+
   if (loading) {
     return <Loading />;
   }
@@ -13,6 +20,7 @@ function CourseDetailsPage({ courseId, course, loading, lessons }) {
   if (!course) {
     return <NotFoundPage />;
   }
+
   return (
     <div className="CourseDetail">
       <header>
@@ -21,9 +29,13 @@ function CourseDetailsPage({ courseId, course, loading, lessons }) {
       <div className="content">
         <div className="sidebar">
           {lessons.length > 0 && (
-            <ul>
+            <ul className="lessons">
               {lessons.map(lesson => (
-                <li key={lesson.id}>{lesson.name}</li>
+                <li key={lesson.id}>
+                  <div className="lesson-item">
+                    {lesson.name}
+                  </div>
+                </li>
               ))}
             </ul>
           )}
@@ -39,9 +51,11 @@ const mapToState = (state, ownProps) => {
   const CourseId = parseInt(ownProps.courseId, 10);
   return {
     loading: state.courses.coursesLoading,
-    lessons: state.lessons.lessons.filter(lesson => lesson.courseId === CourseId),
-    course: state.courses.courses.find((c) => c.id === CourseId),
+    // @ts-ignore
+    lessons: getLessonsByCourse(state, ownProps),
+    // @ts-ignore
+    course: getCoursesById(state, ownProps),
   };
 };
 
-export default connect(mapToState)(CourseDetailsPage);
+export default connect(mapToState, { loadLessons })(CourseDetailsPage);

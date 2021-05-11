@@ -29,6 +29,33 @@
   display: flex;
 }
 
+.CourseDetail .sidebar {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.CourseDetail .sidebar .lessons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.lessons .lesson-item {
+  margin-bottom: 5px;
+  border-style: solid;
+  border-radius: 3px;
+}
+.edit-lesson-btn {
+  opacity: 0;
+  border: none;
+  font-size: 10px;
+  cursor: pointer;
+}
+.lesson-item:hover .edit-lesson-btn,
+.edit-lesson-btn:focus {
+  opacity: 1;
+}
+
 @media only screen and (min-width: 638px) {
   .CourseDetail .content {
     flex-direction: row;
