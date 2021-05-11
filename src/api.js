@@ -26,3 +26,14 @@ export const getCourses = async () => {
 
   return data.data
 }
+
+export const getLessons = async (courseId) => {
+  const data = await axios.get(PREFIX + '/lessons?courseId=' + courseId).then(res => res)
+
+  return data.data
+}
+
+export const updateLesson = async (lesson) => {
+  const res = await axios.put(PREFIX + `/lessons/${lesson.id}`, lesson)
+  return res.data.json()
+}
