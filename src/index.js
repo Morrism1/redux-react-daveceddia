@@ -7,8 +7,8 @@ import './index.css';
 import App from './App';
 import reducer from './reducer/index';
 import thunk from 'redux-thunk';
-import { loadCourses } from './actions';
 import Modal from 'react-modal';
+import { loadLessons, loadCourses } from './actions/index';
 
 const composeEnhancers =
   typeof window === 'object' &&
